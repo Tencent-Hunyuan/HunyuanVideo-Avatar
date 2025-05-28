@@ -125,9 +125,6 @@ class HunyuanVideoSampler(Inference):
         vae_dtype = self.vae.dtype
         with torch.autocast(device_type="cuda", dtype=vae_dtype, enabled=vae_dtype != torch.float32):
 
-            if args.cpu_offload:
-                self.vae.to('cuda')
-
             self.vae.enable_tiling()
             ref_latents = self.vae.encode(pixel_value_ref_for_vae.clone()).latent_dist.sample()
             uncond_ref_latents = self.vae.encode(uncond_uncond_pixel_value_ref).latent_dist.sample()
@@ -139,9 +136,6 @@ class HunyuanVideoSampler(Inference):
                 ref_latents.mul_(self.vae.config.scaling_factor)
                 uncond_ref_latents.mul_(self.vae.config.scaling_factor)
             
-            if args.cpu_offload:
-                self.vae.to('cpu')
-                torch.cuda.empty_cache()
                 
         face_masks = torch.nn.functional.interpolate(face_masks.float().squeeze(2), 
                                                 (ref_latents.shape[-2], 
@@ -179,7 +173,7 @@ class HunyuanVideoSampler(Inference):
             """
         self.logger.info(debug_str)
         pipeline_kwargs = {
-            "cpu_offload": args.cpu_offload
+            "cpu_offload": False
         }
         start_time = time.time()
         samples = self.pipeline(prompt=prompt,                                
