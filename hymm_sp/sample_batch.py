@@ -1,6 +1,7 @@
 import os
 import torch
 import numpy as np
+import imageio
 from pathlib import Path
 from loguru import logger
 from einops import rearrange
@@ -96,8 +97,7 @@ def main():
         final_frames = np.stack(final_frames, axis=0)
         
         if rank == 0:
-            from hymm_sp.data_kits.ffmpeg_utils import save_video
-            save_video(final_frames, output_path, n_rows=len(final_frames), fps=fps.item())
+            imageio.mimsave(output_path, final_frames, fps=fps.item())
             os.system(f"ffmpeg -i '{output_path}' -i '{audio_path}' -shortest '{output_audio_path}' -y -loglevel quiet; rm '{output_path}'")
 
 
