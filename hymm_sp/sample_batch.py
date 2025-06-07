@@ -1,6 +1,7 @@
 import os
 import torch
 import numpy as np
+import imageio
 from pathlib import Path
 from loguru import logger
 from einops import rearrange
