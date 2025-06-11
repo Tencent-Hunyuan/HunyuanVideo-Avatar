@@ -104,7 +104,16 @@ class VideoAudioTextLoaderVal(Dataset):
         new_h = round(h * scale / 64) * 64
 
         if img_size == 704:
-            img_size_long = 1216
+            img_size_long = 1216 
+        elif img_size == 512:
+            img_size_long = 768
+        elif img_size == 384:
+            img_size_long = 576
+        elif img_size == 256:
+            img_size_long = 384
+        else:
+            img_size_long = img_size * 1.5  # Default fallback
+
         if new_w * new_h > img_size * img_size_long:
             import math
             scale = math.sqrt(img_size * img_size_long / w / h)
