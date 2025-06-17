@@ -16,4 +16,5 @@ uvicorn==0.34.2
 decord==0.6.0
 librosa==0.11.0
 scikit-video==1.1.11
-ffmpeg
+requests
+runpod
