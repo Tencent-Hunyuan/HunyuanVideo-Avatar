@@ -115,9 +115,9 @@ conda activate HunyuanVideo-Avatar
 
 # 3. Install PyTorch and other dependencies using conda
 # For CUDA 11.8
-conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 pytorch-cuda=11.8 -c pytorch -c nvidia
+conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 pytorch-cuda==11.8 -c pytorch -c nvidia
 # For CUDA 12.4
-conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 pytorch-cuda=12.4 -c pytorch -c nvidia
+conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 pytorch-cuda==12.4 -c pytorch -c nvidia
 
 # 4. Install pip dependencies
 python -m pip install -r requirements.txt
