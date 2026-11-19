@@ -99,7 +99,9 @@ def save_videos_grid(videos: torch.Tensor, path: str, rescale=False, n_rows=6, f
         x = (x * 255).numpy().astype(np.uint8)
         outputs.append(x)
 
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+    output_dir = os.path.dirname(path)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
     imageio.mimsave(path, outputs, fps=fps, quality=quality)
 
 def encode_image_to_base64(image_path):
